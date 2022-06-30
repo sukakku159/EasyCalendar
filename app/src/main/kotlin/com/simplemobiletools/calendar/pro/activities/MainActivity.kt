@@ -22,10 +22,12 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
 import com.simplemobiletools.calendar.pro.BuildConfig
+import com.simplemobiletools.calendar.pro.LoginSignupActivity
 import com.simplemobiletools.calendar.pro.R
 import com.simplemobiletools.calendar.pro.adapters.EventListAdapter
 import com.simplemobiletools.calendar.pro.adapters.QuickFilterEventTypeAdapter
 import com.simplemobiletools.calendar.pro.databases.EventsDatabase
+
 import com.simplemobiletools.calendar.pro.dialogs.ExportEventsDialog
 import com.simplemobiletools.calendar.pro.dialogs.FilterEventTypesDialog
 import com.simplemobiletools.calendar.pro.dialogs.ImportEventsDialog
@@ -217,7 +219,7 @@ class MainActivity : SimpleActivity(), RefreshRecyclerViewListener {
         shouldGoToTodayBeVisible = currentFragments.last().shouldGoToTodayBeVisible()
         menu.apply {
             goToTodayButton = findItem(R.id.go_to_today)
-            findItem(R.id.print).isVisible = config.storedView != MONTHLY_DAILY_VIEW
+            //findItem(R.id.print).isVisible = config.storedView != MONTHLY_DAILY_VIEW
             findItem(R.id.filter).isVisible = mShouldFilterBeVisible
             findItem(R.id.go_to_today).isVisible = shouldGoToTodayBeVisible && !mIsSearchOpen
             findItem(R.id.go_to_date).isVisible = config.storedView != EVENTS_LIST_VIEW
@@ -250,16 +252,17 @@ class MainActivity : SimpleActivity(), RefreshRecyclerViewListener {
             R.id.change_view -> showViewDialog()
             R.id.go_to_today -> goToToday()
             R.id.go_to_date -> showGoToDateDialog()
-            R.id.print -> printView()
+            //R.id.print -> printView()
             R.id.filter -> showFilterDialog()
             R.id.refresh_caldav_calendars -> refreshCalDAVCalendars(true)
-            R.id.add_holidays -> addHolidays()
-            R.id.add_birthdays -> tryAddBirthdays()
-            R.id.add_anniversaries -> tryAddAnniversaries()
+            //R.id.add_holidays -> addHolidays()
+            //R.id.add_birthdays -> tryAddBirthdays()
+            //R.id.add_anniversaries -> tryAddAnniversaries()
             R.id.import_events -> tryImportEvents()
             R.id.export_events -> tryExportEvents()
-            R.id.settings -> launchSettings()
-            R.id.about -> launchAbout()
+            //R.id.settings -> launchSettings()
+            //R.id.about -> launchAbout()
+            R.id.login -> tryLoginToSync()
             android.R.id.home -> onBackPressed()
             else -> return super.onOptionsItemSelected(item)
         }
@@ -1115,6 +1118,12 @@ class MainActivity : SimpleActivity(), RefreshRecyclerViewListener {
                 }
             }
         }
+    }
+
+    private fun tryLoginToSync() {
+        val intent = Intent(this, LoginSignupActivity::class.java)
+        startActivity(intent)
+
     }
 
     private fun tryExportEvents() {

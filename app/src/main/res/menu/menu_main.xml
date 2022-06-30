@@ -32,26 +32,26 @@
         android:showAsAction="never"
         android:title="@string/go_to_date"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/print"
-        android:showAsAction="never"
-        android:title="@string/print"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/add_holidays"
-        android:showAsAction="never"
-        android:title="@string/add_holidays"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/add_birthdays"
-        android:showAsAction="never"
-        android:title="@string/add_birthdays"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/add_anniversaries"
-        android:showAsAction="never"
-        android:title="@string/add_anniversaries"
-        app:showAsAction="never" />
+<!--    <item-->
+<!--        android:id="@+id/print"-->
+<!--        android:showAsAction="never"-->
+<!--        android:title="@string/print"-->
+<!--        app:showAsAction="never" />-->
+<!--    <item-->
+<!--        android:id="@+id/add_holidays"-->
+<!--        android:showAsAction="never"-->
+<!--        android:title="@string/add_holidays"-->
+<!--        app:showAsAction="never" />-->
+<!--    <item-->
+<!--        android:id="@+id/add_birthdays"-->
+<!--        android:showAsAction="never"-->
+<!--        android:title="@string/add_birthdays"-->
+<!--        app:showAsAction="never" />-->
+<!--    <item-->
+<!--        android:id="@+id/add_anniversaries"-->
+<!--        android:showAsAction="never"-->
+<!--        android:title="@string/add_anniversaries"-->
+<!--        app:showAsAction="never" />-->
     <item
         android:id="@+id/import_events"
         android:showAsAction="never"
@@ -63,13 +63,18 @@
         android:title="@string/export_events_to_ics"
         app:showAsAction="never" />
     <item
-        android:id="@+id/settings"
-        android:icon="@drawable/ic_settings_cog_vector"
-        android:title="@string/settings"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/about"
-        android:icon="@drawable/ic_info_vector"
-        android:title="@string/about"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/login"
+        android:showAsAction="never"
+        app:showAsAction="never"
+        android:title="Login to sync" />
+<!--    <item-->
+<!--        android:id="@+id/settings"-->
+<!--        android:icon="@drawable/ic_settings_cog_vector"-->
+<!--        android:title="@string/settings"-->
+<!--        app:showAsAction="ifRoom" />-->
+<!--    <item-->
+<!--        android:id="@+id/about"-->
+<!--        android:icon="@drawable/ic_info_vector"-->
+<!--        android:title="@string/about"-->
+<!--        app:showAsAction="ifRoom" />-->
 </menu>
