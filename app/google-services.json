@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "319969973600-60e2p1lqbl8q6r13u2n8thvbthsvl4rk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simplemobiletools.calendar.pro",
+            "certificate_hash": "376d53df6a7ed2dc12a0d7f942d11ac970016773"
+          }
+        },
+        {
           "client_id": "319969973600-qeouu0ff4p1e30hfelaidcp6l39vlqin.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

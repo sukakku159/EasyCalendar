@@ -28,7 +28,6 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
         if (firebaseUser != null) {
             //user is already logged in
             startActivity(Intent(requireContext(), MainActivity :: class.java))
-
         }
     }
     private fun validateData() {
@@ -54,8 +53,5 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
             .addOnFailureListener {
                 Toast.makeText(requireActivity(), "Login failed due to ${it.message}", Toast.LENGTH_SHORT).show()
             }
-
-
     }
-
 }
