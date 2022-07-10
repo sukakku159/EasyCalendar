@@ -16,11 +16,15 @@ import android.os.Handler
 import android.provider.ContactsContract.CommonDataKinds
 import android.provider.ContactsContract.Contacts
 import android.provider.ContactsContract.Data
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.net.toUri
 import androidx.core.view.MenuItemCompat
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.simplemobiletools.calendar.pro.BuildConfig
 import com.simplemobiletools.calendar.pro.LoginSignupActivity
 import com.simplemobiletools.calendar.pro.R
@@ -33,6 +37,7 @@ import com.simplemobiletools.calendar.pro.dialogs.FilterEventTypesDialog
 import com.simplemobiletools.calendar.pro.dialogs.ImportEventsDialog
 import com.simplemobiletools.calendar.pro.dialogs.SetRemindersDialog
 import com.simplemobiletools.calendar.pro.extensions.*
+import com.simplemobiletools.calendar.pro.firebase.UploadSave
 import com.simplemobiletools.calendar.pro.fragments.*
 import com.simplemobiletools.calendar.pro.helpers.*
 import com.simplemobiletools.calendar.pro.helpers.Formatter
@@ -55,6 +60,8 @@ import com.simplemobiletools.commons.models.SimpleContact
 import kotlinx.android.synthetic.main.activity_main.*
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
@@ -263,10 +270,19 @@ class MainActivity : SimpleActivity(), RefreshRecyclerViewListener {
             R.id.settings -> launchSettings()
             //R.id.about -> launchAbout()
             R.id.login -> tryLoginToSync()
+            R.id.import_cloud -> tryImportFromCloud()
             android.R.id.home -> onBackPressed()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
+    }
+
+    private fun tryImportFromCloud() {
+        if (!File("${this.filesDir}/${Firebase.auth.currentUser?.uid}").exists() ) {
+            Toast.makeText(this, "Save file not found", Toast.LENGTH_SHORT).show()
+            return
+        }
+        showImportEventsDialog("${this.filesDir}/${Firebase.auth.currentUser?.uid}")
     }
 
     override fun onBackPressed() {
@@ -292,6 +308,12 @@ class MainActivity : SimpleActivity(), RefreshRecyclerViewListener {
             tryImportEventsFromFile(resultData.data!!)
         } else if (requestCode == PICK_EXPORT_FILE_INTENT && resultCode == Activity.RESULT_OK && resultData != null && resultData.data != null) {
             val outputStream = contentResolver.openOutputStream(resultData.data!!)
+            UploadSave.uploadFile(uid = Firebase.auth.currentUser?.uid?: "",resultData.data!!,{
+                message->
+                Toast.makeText(this, "Upload failure~ $message", Toast.LENGTH_SHORT).show()
+            }){
+                Toast.makeText(this, "Upload successfully", Toast.LENGTH_SHORT).show()
+            }
             exportEventsTo(eventTypesToExport, outputStream)
         }
     }

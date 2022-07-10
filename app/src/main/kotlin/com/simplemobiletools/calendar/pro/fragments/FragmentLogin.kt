@@ -8,15 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import com.simplemobiletools.calendar.pro.activities.MainActivity
 import com.simplemobiletools.calendar.pro.databinding.FragmentLoginBinding
+import com.simplemobiletools.calendar.pro.firebase.UploadSave
 
 class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
     override fun getViewBinding(): FragmentLoginBinding = FragmentLoginBinding.inflate(layoutInflater)
     private lateinit var firebaseAuth : FirebaseAuth
     private var username = ""
     private var password = ""
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
 
@@ -59,15 +63,24 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
             .addOnSuccessListener {
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
-                startActivity(Intent(requireActivity(), MainActivity :: class.java))
-                activity?.finish()
+                UploadSave.downloadFile(firebaseUser.uid, "${requireContext().filesDir}/${firebaseUser.uid}".toUri(),{
+                    message->
+                    Toast.makeText(requireContext(),"File save not found", Toast.LENGTH_LONG)
+                    startActivity(Intent(requireActivity(), MainActivity :: class.java))
+                    activity?.finish()
+                }){
+                    Toast.makeText(requireActivity(), "Login success", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(requireActivity(), MainActivity :: class.java))
+                    activity?.finish()
+                }
                 Toast.makeText(requireActivity(), "Login success", Toast.LENGTH_SHORT).show()
+
             }
             .addOnFailureListener {
                 Toast.makeText(requireActivity(), "Login failed due to ${it.message}", Toast.LENGTH_SHORT).show()
             }
-
-
     }
+
+
 
 }

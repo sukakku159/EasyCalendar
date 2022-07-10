@@ -44,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:inputType="textPassword"
             android:textColorHint="@color/hint_black"
             android:background="@drawable/bg_edit_text_login"/>
 
@@ -59,6 +60,7 @@
             android:id="@+id/edt_repassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="Re-enter password"
             android:textColorHint="@color/hint_black"
             android:background="@drawable/bg_edit_text_login"/>
@@ -79,7 +81,7 @@
         android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LOGIN"
+        android:text="SIGNUP"
         android:background="@drawable/btn_login"
         app:backgroundTint="@null"
         android:layout_marginTop="32dp"
