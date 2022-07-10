@@ -19,15 +19,24 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
     private var password = ""
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
-        firebaseAuth = FirebaseAuth.getInstance()
-        checkUser()
-        validateData()
+
     }
-     private fun checkUser() {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        firebaseAuth = FirebaseAuth.getInstance()
+        //checkUser()
+        binding.btnLogin.setOnClickListener {
+            validateData()
+        }
+
+    }
+    private fun checkUser() {
         val firebaseUser = firebaseAuth.currentUser
         if (firebaseUser != null) {
             //user is already logged in
             startActivity(Intent(requireContext(), MainActivity :: class.java))
+
         }
     }
     private fun validateData() {
@@ -48,10 +57,17 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
     private fun firebaseLogin() {
         firebaseAuth.signInWithEmailAndPassword(username, password)
             .addOnSuccessListener {
+                val firebaseUser = firebaseAuth.currentUser
+                val email = firebaseUser!!.email
+                startActivity(Intent(requireActivity(), MainActivity :: class.java))
+                activity?.finish()
                 Toast.makeText(requireActivity(), "Login success", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                 Toast.makeText(requireActivity(), "Login failed due to ${it.message}", Toast.LENGTH_SHORT).show()
             }
+
+
     }
+
 }

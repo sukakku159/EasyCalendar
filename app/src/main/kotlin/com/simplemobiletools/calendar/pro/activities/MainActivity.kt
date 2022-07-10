@@ -260,7 +260,7 @@ class MainActivity : SimpleActivity(), RefreshRecyclerViewListener {
             //R.id.add_anniversaries -> tryAddAnniversaries()
             R.id.import_events -> tryImportEvents()
             R.id.export_events -> tryExportEvents()
-            //R.id.settings -> launchSettings()
+            R.id.settings -> launchSettings()
             //R.id.about -> launchAbout()
             R.id.login -> tryLoginToSync()
             android.R.id.home -> onBackPressed()

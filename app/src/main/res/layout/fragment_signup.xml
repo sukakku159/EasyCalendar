@@ -13,6 +13,7 @@
         android:layout_marginTop="22dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
@@ -39,6 +40,7 @@
         android:layout_marginTop="22dp"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
@@ -54,6 +56,7 @@
         android:layout_marginTop="22dp"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_repassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Re-enter password"
